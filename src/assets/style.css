@@ -31,7 +31,7 @@ p{
   padding:0 20px;
 }
 
-.text-primary-button{
+.primary-text{
   color:#f7c08a;
 }
 
@@ -68,7 +68,7 @@ p{
   color: #333;
 }
 
-.bg-primary-background {
+.primary-background {
   background: #f7c08a;
   color: #333;
 }

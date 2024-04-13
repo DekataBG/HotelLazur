@@ -6,7 +6,7 @@
     <div id="showcase">
         <div class="container">
             <div class="showcase-content">
-                <h1><span class="text-primary-button">Enjoy</span> your stay</h1>
+                <h1><span class="primary-text">Enjoy</span> your stay</h1>
                 <p class="lead">Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio aperiam quos quisquam obcaecati illo facilis.</p>
                 <a class="btn" href="about.html">About our hotel</a>
             </div>

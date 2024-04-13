@@ -6,7 +6,7 @@
     <section id="home-info" class="bg-dark">
         <div class="info-img"></div>
         <div class="info-content">
-            <h2><span class="text-primary-button">History</span> of our Hotel</h2>
+            <h2><span class="primary-text">History</span> of our Hotel</h2>
             <p>
               Lorem ipsum dolor, sit amet consectetur adipisicing elit. Assumenda
               aliquam dolor alias iste autem, quaerat magni unde accusantium qui

@@ -12,7 +12,7 @@ const props = defineProps({
 <template>
     <section id="features" class="row bg-light">
         <div class="col-md-3" v-for="feature in features" :key="feature.id">
-            <div :class="feature.id % 2 == 0 ? 'box bg-light' : 'box bg-primary-background'">
+            <div :class="feature.id % 2 == 0 ? 'box bg-light' : 'box primary-background'">
                 <h3>{{feature.title}}</h3>
                 <p>{{feature.description}}</p>
             </div>

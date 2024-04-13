@@ -6,7 +6,7 @@
     <section id="about-info" class="bg-light py-3">
         <div class="container">
             <div class="info-left">
-                <h1 class="l-heading"> <span class="text-primary-button">About</span> our Hotel </h1>
+                <h1 class="l-heading"> <span class="primary-text">About</span> our Hotel </h1>
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam excepturi omnis fugiat, quasi saepe provident non nulla itaque porro alias error. Similique repellendus odit enim illum, iusto tempore libero obcaecati.</p>
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas voluptatibus architecto labore facere expedita recusandae nesciunt beatae laudantium dolores rerum!</p>
             </div>
