@@ -12,11 +12,6 @@ import { RouterLink } from 'vue-router';
             required: true
         }
     })
-
-    const navigate = (route) => {
-        $router.push(route)
-    }
-
 </script>
 
 <template>
