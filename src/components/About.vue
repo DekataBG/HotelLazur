@@ -11,7 +11,7 @@
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas voluptatibus architecto labore facere expedita recusandae nesciunt beatae laudantium dolores rerum!</p>
             </div>
             <div class="info-right">
-                <img src="./img/photo-2.jpg" alt="Hotel">
+                <img src="../assets/img/photo-2.jpg" alt="Hotel">
             </div>
         </div>
     </section>

@@ -12,6 +12,7 @@ const links = ref([
   { id: 2, title: "About us", path: "/about", isOpen: false },
   { id: 3, title: "Contact us", path: "/contact-us", isOpen: false },
 ])
+
 const features = [
   {id: 1, title: "Great Location", description: "The hotel is near the center of the city and all the major attractions"},
   {id: 2, title: "Tasty food", description: "The best chefs in the city cook for you"},
