@@ -1,4 +1,5 @@
 import { ref } from 'vue'
+import { fetchRooms } from './plugins/api'
 
 // Type declarations
 
@@ -32,65 +33,9 @@ export const links = ref([
 
 export const hotelName = "Hotel Lazur"
 
-const imagePath = "./src/assets/img/rooms/"
+export const imagePath = "./src/assets/img/rooms/"
 
-export const rooms = ref([
-  { 
-    id: 1, 
-    title: "Двойна стая с изглед градина 3 възрастни", 
-    description: "Подходяща за настаняване на до 3 възрастни",
-    price: 80,
-    image: imagePath + "3beds.jpg"
-  },
-  { 
-    id: 2, 
-    title: "Двойна стая с изглед градина 2+1", 
-    description: "Подходяща за настаняване на 2 възрастни или 2 възрастни с дете", 
-    price: 60,
-    image: imagePath + "beds2+1.jpg"
-  },
-  { 
-    id: 3, 
-    title: "Двойна стая с изглед градина", 
-    description: "Подходяща за настаняване на 1 възрастен или 1 възрастен с дете", 
-    price: 40,
-    image: imagePath + "beds2.jpg"
-  },
-  { 
-    id: 4, 
-    title: "Двойна стая с изглед басейн 3 възрастни", 
-    description: "Подходяща за настаняване на до 3 възрастни", 
-    price: 80,
-    image: imagePath + "3beds.jpg"
-  },
-  { 
-    id: 5, 
-    title: "Двойна стая с изглед басейн 2+1", 
-    description: "Подходяща за настаняване на 2 възрастни или 2 възрастни с дете", 
-    price: 60,
-    image: imagePath + "beds2+1.jpg"
-  },
-  { 
-    id: 6, 
-    title: "Двойна стая с изглед басейн", 
-    description: "Подходяща за настаняване на 1 възрастен с 1 дете", 
-    price: 40,
-    image: imagePath + "beds2.jpg"
-  },
-  { id: 7, 
-    title: "Апартамент", 
-    description: "Подходяща за настаняване на 4 възрастни или 2 възрастни с 2 деца", 
-    price: 140,
-    image: imagePath + "apartment.jpg"
-  },
-  { 
-    id: 8, 
-    title: "Фамилна стая", 
-    description: "Подходяща за настаняване на 2 възрастни с 2 деца", 
-    price: 140,
-    image: imagePath + "family.jpg"
-  }
-])
+export const rooms = ref( await fetchRooms())
 
 export const room = ref({ 
   id: 1, 
