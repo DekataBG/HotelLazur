@@ -12,6 +12,12 @@ import { RouterLink } from 'vue-router';
             required: true
         }
     })
+
+    const changeActive = (clickedLink, allLinks) => {
+        allLinks.forEach(link => {
+            link.isOpen = (link === clickedLink)
+        });
+    }
 </script>
 
 <template>
@@ -25,6 +31,7 @@ import { RouterLink } from 'vue-router';
                     :to="link.path"
                     v-for="link in links"
                     :key="link.id"
+                    @click="changeActive(link, links)"
                 >
                     <li>
                         <a :class="link.isOpen ? 'current' : '!current'">{{link.title}}</a>
