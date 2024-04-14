@@ -1,5 +1,28 @@
 import { ref } from 'vue'
 
+// Type declarations
+
+export interface ReservationObject{
+  id: number | null,
+  startDate: string,
+  endDate: string,
+  email: string,
+  roomID: number
+}
+
+export interface RoomObject{
+  id: number | null,
+  title: string,
+  description: string,
+  features: string,
+  price: number,
+  imagePath: string,
+  capacity: number,
+  takenDates: ReservationObject[] | null
+}
+
+// End of type declarations
+
 export const links = ref([
   { id: 1, title: "Home", path: "/", isOpen: true },
   { id: 2, title: "About us", path: "/about", isOpen: false },
