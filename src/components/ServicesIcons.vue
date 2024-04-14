@@ -1,6 +1,5 @@
 <template>
     <div class="roomlist_carats">
-        <div class="vbo-room-carats">
           <span class="vbo-room-carat"
             ><span class="vbo-expl" data-vbo-expl="WiFi"
               ><i
@@ -57,14 +56,13 @@
             ><span class="vbo-expl" data-vbo-expl="Балкон"
               ><i class="fas fa-image vbo-icn-carat vbo-pref-color-text"></i></span
           ></span>
-        </div>
       </div>
 </template>
 
 <style scoped>
-.roomlist_carats .vbo-room-carat, .room_carats .vbo-room-carat {
+.roomlist_carats .vbo-room-carat, .room_carats {
     display: inline-block;
-    margin: 4px 10px 0 0;
+    margin: 4px 10px 0 var(--margin-size, 0); /* Default margin size */;
 }
 
 
@@ -131,7 +129,7 @@
 /* Tooltip Charateristics - End */
 
 .vbo-icn-carat {
-	font-size: 16px;
+    font-size: var(--font-size, 16px); /* Default font size */
 }
 .vbo-pref-color-text {
     color: #033f59 !important;

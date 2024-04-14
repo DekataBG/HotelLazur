@@ -32,8 +32,8 @@ import { RouterLink } from 'vue-router';
             >
               <img
                 decoding="async"
-                src="https://pliskahotel.com/wp-content/plugins/vikbooking/site/resources/uploads/imgp5133.jpg"
-                alt="Стая"
+                :src="room.image"
+                :alt="room.title"
                 class="vblistimg"
               />
             </a>
@@ -146,7 +146,8 @@ img.vblistimg {
     border-style: solid;
     border-radius: 15px;
     border-width: 1px;
-    max-width: 100%;
+    height: 33vh;
+    width: 50vh;
 	margin:0 15px 0 0;
 }
 
