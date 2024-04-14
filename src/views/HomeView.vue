@@ -5,7 +5,7 @@ import AboutHotel from '../components/AboutHotel.vue'
 import Features from '../components/Features.vue'
 import Footer from '../components/Footer.vue'
 
-import { links, hotelName } from '../constants.js'
+import { links, hotelName } from '../constants.ts'
 </script>
 
 <template>

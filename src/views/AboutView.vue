@@ -4,7 +4,7 @@ import About from '../components/About.vue'
 import Footer from '../components/Footer.vue'
 import Guests from '../components/Guests.vue'
 
-import { links, hotelName } from '../constants.js'
+import { links, hotelName } from '../constants.ts'
 </script>
 
 <template>
