@@ -4,12 +4,14 @@ import ServicesIcons from './ServicesIcons.vue'
 import { defineProps } from 'vue';
 import { RouterLink } from 'vue-router';
 
-    const props = defineProps({
-        rooms: {
-            type: Array,
-            required: true
-        }
-    })
+import { imagePath } from '@/constants';
+
+const props = defineProps({
+    rooms: {
+        type: Array,
+        required: true
+    }
+})
 
 </script>
 <template>
@@ -32,7 +34,7 @@ import { RouterLink } from 'vue-router';
             >
               <img
                 decoding="async"
-                :src="room.image"
+                :src="imagePath + room.imagePath"
                 :alt="room.title"
                 class="vblistimg"
               />
