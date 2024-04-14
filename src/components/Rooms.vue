@@ -1,5 +1,16 @@
 <script setup>
 import ServicesIcons from './ServicesIcons.vue'
+
+import { defineProps } from 'vue';
+import { RouterLink } from 'vue-router';
+
+    const props = defineProps({
+        rooms: {
+            type: Array,
+            required: true
+        }
+    })
+
 </script>
 <template>
   <div class="text-center mt-2">
@@ -7,7 +18,11 @@ import ServicesIcons from './ServicesIcons.vue'
     <h1 class="primary-text">Стаи</h1>
   </div>
   <ul class="vblist">
-    <li class="room_result">
+    <li 
+        class="room_result" 
+        v-for="room in rooms" 
+        :key="room.id"
+    >
       <div class="room_result-inner">
         <div class="vblistroomblock">
           <div class="vbimglistdiv">
@@ -18,7 +33,7 @@ import ServicesIcons from './ServicesIcons.vue'
               <img
                 decoding="async"
                 src="https://pliskahotel.com/wp-content/plugins/vikbooking/site/resources/uploads/imgp5133.jpg"
-                alt="Двойна стая с изглед градина 3 възрастни"
+                alt="Стая"
                 class="vblistimg"
               />
             </a>
@@ -34,12 +49,12 @@ import ServicesIcons from './ServicesIcons.vue'
             <div class="vbdescrlistdiv">
               <h4 class="vbrowcname">
                 <a href="https://pliskahotel.com/dblpark-view-ai/"
-                  >Двойна стая с изглед градина 3 възрастни</a
+                  >{{room.title}}</a
                 >
               </h4>
               <span class="vblistroomcat"></span>
               <div class="vbrowcdescr">
-                Подходяща за настаняване на до 3-ма възрастни
+                {{room.description}}
               </div>
             </div>
             <ServicesIcons />
@@ -55,7 +70,7 @@ import ServicesIcons from './ServicesIcons.vue'
                   <i class="fas fa-male vbo-pref-color-text"></i>
                 </div>
                 <div class="vbsrowpricediv">
-                  <span class="room_cost">39лв. за нощувка</span>
+                  <span class="room_cost">{{room.price}} лв. за нощувка</span>
                 </div>
               </div>
               <div class="vbselectordiv">
@@ -63,455 +78,6 @@ import ServicesIcons from './ServicesIcons.vue'
                   <a
                     class="btn vbo-pref-color-btn"
                     href="https://pliskahotel.com/dblpark-view-ai/"
-                    >Детайли</a
-                  >
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </li>
-    <li class="room_result">
-      <div class="room_result-inner">
-        <div class="vblistroomblock">
-          <div class="vbimglistdiv">
-            <a
-              class="vbo-roomslist-imglink"
-              href="https://pliskahotel.com/garden-view-kids/"
-            >
-              <img
-                decoding="async"
-                src="https://pliskahotel.com/wp-content/plugins/vikbooking/site/resources/uploads/2imgp5133.jpg"
-                alt="Двойна стая с изглед градина 1+2"
-                class="vblistimg"
-              />
-            </a>
-            <div class="vbmodalrdetails vbo-roomslist-opengallery-cont">
-              <a
-                href="javascript: void(0);"
-                class="vbo-roomslist-opengallery"
-                data-roomid="7"
-                ></a>
-            </div>
-          </div>
-          <div class="vbo-info-room">
-            <div class="vbdescrlistdiv">
-              <h4 class="vbrowcname">
-                <a href="https://pliskahotel.com/garden-view-kids/"
-                  >Двойна стая с изглед градина 1+2</a
-                >
-              </h4>
-              <span class="vblistroomcat"></span>
-              <div class="vbrowcdescr">
-                Подходяща за настаняване на 2 възрастни или 2 възрастни с дете
-              </div>
-            </div>
-            <ServicesIcons />
-          </div>
-        </div>
-        <div class="vbcontdivtot">
-          <div class="vbdivtot">
-            <div class="vbdivtotinline">
-              <div class="vbsrowprice">
-                <div class="vbrowroomcapacity">
-                  <i class="fas fa-male vbo-pref-color-text"></i>
-                </div>
-                <div class="vbsrowpricediv">
-                    <span class="room_cost">39лв. за нощувка</span>
-                </div>
-              </div>
-              <div class="vbselectordiv">
-                <div class="vbselectr">
-                  <a
-                    class="btn vbo-pref-color-btn"
-                    href="https://pliskahotel.com/garden-view-kids/"
-                    >Детайли</a
-                  >
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </li>
-    <li class="room_result">
-      <div class="room_result-inner">
-        <div class="vblistroomblock">
-          <div class="vbimglistdiv">
-            <a
-              class="vbo-roomslist-imglink"
-              href="https://pliskahotel.com/rooms-list/?view=roomdetails&amp;roomid=10"
-            >
-              <img
-                decoding="async"
-                src="https://pliskahotel.com/wp-content/plugins/vikbooking/site/resources/uploads/1big_imgp5132.jpg"
-                alt="Двойна стая с изглед градина"
-                class="vblistimg"
-              />
-            </a>
-            <div class="vbmodalrdetails vbo-roomslist-opengallery-cont">
-              <a
-                href="javascript: void(0);"
-                class="vbo-roomslist-opengallery"
-                data-roomid="10"
-                ></a>
-            </div>
-          </div>
-          <div class="vbo-info-room">
-            <div class="vbdescrlistdiv">
-              <h4 class="vbrowcname">
-                <a
-                  href="https://pliskahotel.com/rooms-list/?view=roomdetails&amp;roomid=10"
-                  >Двойна стая с изглед градина</a
-                >
-              </h4>
-              <span class="vblistroomcat"></span>
-              <div class="vbrowcdescr">
-                Подходяща за настаняване на 1 възрастен или 1 възрастен с дете
-              </div>
-            </div>
-            <ServicesIcons />
-          </div>
-        </div>
-        <div class="vbcontdivtot">
-          <div class="vbdivtot">
-            <div class="vbdivtotinline">
-              <div class="vbsrowprice">
-                <div class="vbrowroomcapacity">
-                  <i class="fas fa-male vbo-pref-color-text"></i>
-                  <i class="fas fa-male vbo-pref-color-text"></i>
-                </div>
-                <div class="vbsrowpricediv">
-                    <span class="room_cost">39лв. за нощувка</span>
-                </div>
-              </div>
-              <div class="vbselectordiv">
-                <div class="vbselectr">
-                  <a
-                    class="btn vbo-pref-color-btn"
-                    href="https://pliskahotel.com/rooms-list/?view=roomdetails&amp;roomid=10"
-                    >Детайли</a
-                  >
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </li>
-    <li class="room_result">
-      <div class="room_result-inner">
-        <div class="vblistroomblock">
-          <div class="vbimglistdiv">
-            <a
-              class="vbo-roomslist-imglink"
-              href="https://pliskahotel.com/dblpool-view-ai/"
-            >
-              <img
-                decoding="async"
-                src="https://pliskahotel.com/wp-content/plugins/vikbooking/site/resources/uploads/imgp5117.jpg"
-                alt="Двойна стая с изглед басейн 3 възрастни"
-                class="vblistimg"
-              />
-            </a>
-            <div class="vbmodalrdetails vbo-roomslist-opengallery-cont">
-              <a
-                href="javascript: void(0);"
-                class="vbo-roomslist-opengallery"
-                data-roomid="2"
-                ></a>
-            </div>
-          </div>
-          <div class="vbo-info-room">
-            <div class="vbdescrlistdiv">
-              <h4 class="vbrowcname">
-                <a href="https://pliskahotel.com/dblpool-view-ai/"
-                  >Двойна стая с изглед басейн 3 възрастни</a
-                >
-              </h4>
-              <span class="vblistroomcat"></span>
-              <div class="vbrowcdescr">
-                Подходяща за настаняване на до 3-ма възрастни
-              </div>
-            </div>
-            <ServicesIcons />
-            </div>
-        </div>
-        <div class="vbcontdivtot">
-          <div class="vbdivtot">
-            <div class="vbdivtotinline">
-              <div class="vbsrowprice">
-                <div class="vbrowroomcapacity">
-                  <i class="fas fa-male vbo-pref-color-text"></i>
-                  <i class="fas fa-male vbo-pref-color-text"></i>
-                  <i class="fas fa-male vbo-pref-color-text"></i>
-                </div>
-                <div class="vbsrowpricediv">
-                    <span class="room_cost">80лв. за нощувка</span>
-                </div>
-              </div>
-              <div class="vbselectordiv">
-                <div class="vbselectr">
-                  <a
-                    class="btn vbo-pref-color-btn"
-                    href="https://pliskahotel.com/dblpool-view-ai/"
-                    >Детайли</a
-                  >
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </li>
-    <li class="room_result">
-      <div class="room_result-inner">
-        <div class="vblistroomblock">
-          <div class="vbimglistdiv">
-            <a
-              class="vbo-roomslist-imglink"
-              href="https://pliskahotel.com/pool-view-kids/"
-            >
-              <img
-                decoding="async"
-                src="https://pliskahotel.com/wp-content/plugins/vikbooking/site/resources/uploads/1imgp5117.jpg"
-                alt="Двойна стая с изглед басейн 1+2"
-                class="vblistimg"
-              />
-            </a>
-            <div class="vbmodalrdetails vbo-roomslist-opengallery-cont">
-              <a
-                href="javascript: void(0);"
-                class="vbo-roomslist-opengallery"
-                data-roomid="6"
-                ></a>
-            </div>
-          </div>
-          <div class="vbo-info-room">
-            <div class="vbdescrlistdiv">
-              <h4 class="vbrowcname">
-                <a href="https://pliskahotel.com/pool-view-kids/"
-                  >Двойна стая с изглед басейн 1+2</a
-                >
-              </h4>
-              <span class="vblistroomcat"></span>
-              <div class="vbrowcdescr">
-                Подходяща за настаняване на 2-ма възрастни или 2-ма възрастни с
-                дете.
-              </div>
-            </div>
-            <ServicesIcons />
-          </div>
-        </div>
-        <div class="vbcontdivtot">
-          <div class="vbdivtot">
-            <div class="vbdivtotinline">
-              <div class="vbsrowprice">
-                <div class="vbrowroomcapacity">
-                  <i class="fas fa-male vbo-pref-color-text"></i>
-                </div>
-                <div class="vbsrowpricediv">
-                    <span class="room_cost">44лв. за нощувка</span>
-                </div>
-              </div>
-              <div class="vbselectordiv">
-                <div class="vbselectr">
-                  <a
-                    class="btn vbo-pref-color-btn"
-                    href="https://pliskahotel.com/pool-view-kids/"
-                    >Детайли</a
-                  >
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </li>
-    <li class="room_result">
-      <div class="room_result-inner">
-        <div class="vblistroomblock">
-          <div class="vbimglistdiv">
-            <a
-              class="vbo-roomslist-imglink"
-              href="https://pliskahotel.com/rooms-list/?view=roomdetails&amp;roomid=9"
-            >
-              <img
-                decoding="async"
-                src="https://pliskahotel.com/wp-content/plugins/vikbooking/site/resources/uploads/1big_imgp5122.jpg"
-                alt="Двойна стая с изглед басейн"
-                class="vblistimg"
-              />
-            </a>
-            <div class="vbmodalrdetails vbo-roomslist-opengallery-cont">
-              <a
-                href="javascript: void(0);"
-                class="vbo-roomslist-opengallery"
-                data-roomid="9"
-                ></a>
-            </div>
-          </div>
-          <div class="vbo-info-room">
-            <div class="vbdescrlistdiv">
-              <h4 class="vbrowcname">
-                <a
-                  href="https://pliskahotel.com/rooms-list/?view=roomdetails&amp;roomid=9"
-                  >Двойна стая с изглед басейн</a
-                >
-              </h4>
-              <span class="vblistroomcat"></span>
-              <div class="vbrowcdescr">
-                Подходяща за настаняване на 1 възрастен или 1 възрастен с дете.
-              </div>
-            </div>
-            <ServicesIcons />
-          </div>
-        </div>
-        <div class="vbcontdivtot">
-          <div class="vbdivtot">
-            <div class="vbdivtotinline">
-              <div class="vbsrowprice">
-                <div class="vbrowroomcapacity">
-                  <i class="fas fa-male vbo-pref-color-text"></i>
-                  <i class="fas fa-male vbo-pref-color-text"></i>
-                </div>
-                <div class="vbsrowpricediv">
-                    <span class="room_cost">44лв. за нощувка</span>
-                </div>
-              </div>
-              <div class="vbselectordiv">
-                <div class="vbselectr">
-                  <a
-                    class="btn vbo-pref-color-btn"
-                    href="https://pliskahotel.com/rooms-list/?view=roomdetails&amp;roomid=9"
-                    >Детайли</a
-                  >
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </li>
-    <li class="room_result">
-      <div class="room_result-inner">
-        <div class="vblistroomblock">
-          <div class="vbimglistdiv">
-            <a
-              class="vbo-roomslist-imglink"
-              href="https://pliskahotel.com/app/"
-            >
-              <img
-                decoding="async"
-                src="https://pliskahotel.com/wp-content/plugins/vikbooking/site/resources/uploads/1imgp5121.jpg"
-                alt="Апартамент"
-                class="vblistimg"
-              />
-            </a>
-            <div class="vbmodalrdetails vbo-roomslist-opengallery-cont">
-              <a
-                href="javascript: void(0);"
-                class="vbo-roomslist-opengallery"
-                data-roomid="3"
-                ></a>
-            </div>
-          </div>
-          <div class="vbo-info-room">
-            <div class="vbdescrlistdiv">
-              <h4 class="vbrowcname">
-                <a href="https://pliskahotel.com/app/">Апартамент</a>
-              </h4>
-              <span class="vblistroomcat"></span>
-              <div class="vbrowcdescr">
-                Подходящ за настаняване на до 4-ма възрастни или 2-ма възрастни
-                с 2 деца.
-              </div>
-            </div>
-            <ServicesIcons />
-          </div>
-        </div>
-        <div class="vbcontdivtot">
-          <div class="vbdivtot">
-            <div class="vbdivtotinline">
-              <div class="vbsrowprice">
-                <div class="vbrowroomcapacity">
-                  <i class="fas fa-male vbo-pref-color-text"></i>
-                  <i class="fas fa-male vbo-pref-color-text"></i>
-                  <i class="fas fa-male vbo-pref-color-text"></i>
-                  <i class="fas fa-male vbo-pref-color-text"></i>
-                </div>
-                <div class="vbsrowpricediv">
-                    <span class="room_cost">131лв. за нощувка</span>
-                </div>
-              </div>
-              <div class="vbselectordiv">
-                <div class="vbselectr">
-                  <a
-                    class="btn vbo-pref-color-btn"
-                    href="https://pliskahotel.com/app/"
-                    >Детайли</a
-                  >
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </li>
-    <li class="room_result">
-      <div class="room_result-inner">
-        <div class="vblistroomblock">
-          <div class="vbimglistdiv">
-            <a
-              class="vbo-roomslist-imglink"
-              href="https://pliskahotel.com/fam/"
-            >
-              <img
-                decoding="async"
-                src="https://pliskahotel.com/wp-content/plugins/vikbooking/site/resources/uploads/dsc00074.jpg"
-                alt="Фамилна стая"
-                class="vblistimg"
-              />
-            </a>
-            <div class="vbmodalrdetails vbo-roomslist-opengallery-cont">
-              <a
-                href="javascript: void(0);"
-                class="vbo-roomslist-opengallery"
-                data-roomid="4"
-                ></a>
-            </div>
-          </div>
-          <div class="vbo-info-room">
-            <div class="vbdescrlistdiv">
-              <h4 class="vbrowcname">
-                <a href="https://pliskahotel.com/fam/">Фамилна стая</a>
-              </h4>
-              <span class="vblistroomcat"></span>
-              <div class="vbrowcdescr">
-                Подходяща за настаняване на 2-ма възрастни с 2 деца.
-              </div>
-            </div>
-            <ServicesIcons />
-          </div>
-        </div>
-        <div class="vbcontdivtot">
-          <div class="vbdivtot">
-            <div class="vbdivtotinline">
-              <div class="vbsrowprice">
-                <div class="vbrowroomcapacity">
-                  <i class="fas fa-male vbo-pref-color-text"></i>
-                  <i class="fas fa-male vbo-pref-color-text"></i>
-                </div>
-                <div class="vbsrowpricediv">
-                    <span class="room_cost">131лв. за нощувка</span>
-                </div>
-              </div>
-              <div class="vbselectordiv">
-                <div class="vbselectr">
-                  <a
-                    class="btn vbo-pref-color-btn"
-                    href="https://pliskahotel.com/fam/"
                     >Детайли</a
                   >
                 </div>
