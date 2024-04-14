@@ -1,7 +1,6 @@
 <script setup>
 import Navbar from '../components/NavBar.vue'
-import ContactForm from '../components/ContactForm.vue'
-import ContactInfo from '../components/ContactInfo.vue'
+import Rooms from '../components/Rooms.vue'
 import Footer from '../components/Footer.vue'
 
 import { links, hotelName } from '../constants.js'
@@ -9,7 +8,6 @@ import { links, hotelName } from '../constants.js'
 
 <template>
     <Navbar :links="links" :hotelName="hotelName"/>
-    <ContactForm/>
-    <ContactInfo/>
+    <Rooms />
     <Footer :hotelName="hotelName"/>
 </template>

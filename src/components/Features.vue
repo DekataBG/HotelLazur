@@ -1,21 +1,27 @@
 <script setup>
-import { defineProps } from 'vue';
-
-const props = defineProps({
-    features: {
-        type: Array,
-        required: true
-    }
-})
 </script>
 
 <template>
     <section id="features" class="row bg-light">
-        <div class="col-md-3" v-for="feature in features" :key="feature.id">
-            <div :class="feature.id % 2 == 0 ? 'box bg-light' : 'box primary-background'">
-                <h3>{{feature.title}}</h3>
-                <p>{{feature.description}}</p>
-            </div>
+        <div class="box primary-background col-md-3">
+            <i class="fas fa-hotel fa-3x"></i>
+            <h3>Great Location</h3>
+            <p>The hotel is near the center of the city and all the major attractions</p>
+        </div>
+        <div class="box bg-light col-md-3">
+            <i class="fas fa-utensils fa-3x"></i>
+            <h3>Tasty food</h3>
+            <p>The best chefs in the city cook for you</p>
+        </div>
+        <div class="box primary-background col-md-3">
+            <i class="fas fa-dumbbell fa-3x"></i>
+            <h3>Gym</h3>
+            <p>The hotel has gym with the newest equipment</p>
+        </div>
+        <div class="box bg-light col-md-3">
+            <i class="fas fa-swimmer fa-3x"></i>
+            <h3>Swimming Pool</h3>
+            <p>The pool is 25 meters long and 10 meters wide</p>
         </div>
     </section>
     
