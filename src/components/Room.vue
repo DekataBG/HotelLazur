@@ -1,6 +1,8 @@
 <script setup>
-import { defineProps } from 'vue';
+import { defineProps, ref, onMounted, computed } from 'vue';
 import ServicesIcons from '../components/ServicesIcons.vue'
+import VueDatePicker from '@vuepic/vue-datepicker';
+import '@vuepic/vue-datepicker/dist/main.css'
 
 const props = defineProps({
   room: {
@@ -8,9 +10,14 @@ const props = defineProps({
     required: true,
   },
 });
+
+import { addDays, subDays } from 'date-fns';
+const date = ref();
+
+const disabledDates = [subDays(new Date(), 1), new Date(), addDays(new Date(), 1)];
 </script>
 
-<template>
+<template>      
   <h1 class="title text-center mt-3">{{ room.title }}</h1>
   <div class="text-center mb-5">
     <img
@@ -38,12 +45,23 @@ const props = defineProps({
     </div>
   </div>
   <div class="text-center fw-bold">
-    <h3>Резервирай сега</h3>
+    <h3 class="primary-text">РЕЗЕРВИРАЙ СЕГА</h3>
+  </div>
+  <div class="booking row justify-content-center mb-3 p-4">
+    <div class="col-12 col-md-3">
+        <VueDatePicker 
+            v-model="date" 
+            :range="{ noDisabledRange: true }"
+            :disabled-dates="disabledDates"
+            locale="bg"
+            format="P"
+        />
+    </div>
   </div>
 </template>
 
 <style scoped>
-.title, .description, h3 {
+.title, .description {
   color: #033f59;
 }
 
@@ -61,5 +79,9 @@ const props = defineProps({
 
 p {
     font-size: 17px;
+}
+
+.booking {
+    background-color: #eee;
 }
 </style>
