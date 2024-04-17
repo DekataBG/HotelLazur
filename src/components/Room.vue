@@ -1,8 +1,9 @@
 <script setup>
 import { defineProps, ref, onMounted, computed } from 'vue';
+import { addDays, subDays } from 'date-fns';
 import ServicesIcons from '../components/ServicesIcons.vue'
 import VueDatePicker from '@vuepic/vue-datepicker';
-import '@vuepic/vue-datepicker/dist/main.css'
+import '@vuepic/vue-datepicker/dist/main.css';
 
 const props = defineProps({
   room: {
@@ -11,18 +12,18 @@ const props = defineProps({
   },
 });
 
-import { addDays, subDays } from 'date-fns';
+const parts = props.room.imagePath.split('/')
+const fileName = parts[parts.length - 1]
+console.log(fileName);
 const date = ref();
-
 const disabledDates = [subDays(new Date(), 1), new Date(), addDays(new Date(), 1)];
 </script>
 
-<template>      
+<template>
   <h1 class="title text-center mt-3">{{ room.title }}</h1>
   <div class="text-center mb-5">
     <img
-      decoding="async"
-      :src="room.image"
+      :src="`/rooms/${fileName}`"
       :alt="room.title"
       class="room-img"
     />
@@ -48,14 +49,18 @@ const disabledDates = [subDays(new Date(), 1), new Date(), addDays(new Date(), 1
     <h3 class="primary-text">РЕЗЕРВИРАЙ СЕГА</h3>
   </div>
   <div class="booking row justify-content-center mb-3 p-4">
-    <div class="col-12 col-md-3">
+    <div class="col-3">
         <VueDatePicker 
-            v-model="date" 
+            v-model="date"
+            placeholder="Избери дати"
             :range="{ noDisabledRange: true }"
             :disabled-dates="disabledDates"
             locale="bg"
             format="P"
         />
+    </div>
+    <div class="col-1">
+        <button class="booking-button">РЕЗЕРВИРАЙ</button>
     </div>
   </div>
 </template>
@@ -83,5 +88,17 @@ p {
 
 .booking {
     background-color: #eee;
+}
+
+.booking-button {
+	background: #cb5951;
+	border-radius:30px;
+	color: #fff;
+	padding: 10px;
+}
+
+.booking-button:hover {
+	color: #fff;
+	background: #4B7B92;
 }
 </style>

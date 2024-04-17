@@ -1,8 +1,8 @@
 import axios, { type AxiosResponse } from 'axios';
-import { type RoomObject, type ReservationObject } from '@/constants';
+import { type RoomObject, type ReservationObject } from '@/constants.ts';
 
 
-const baseURL = 'http://192.168.0.104:8000';
+const baseURL = 'http://127.0.0.1:8000';
 
 export async function fetchRoom(roomID: number): Promise<RoomObject>{
   const response: AxiosResponse<RoomObject> = await axios.get(`${baseURL}/rooms/${roomID}`)

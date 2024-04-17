@@ -4,11 +4,11 @@ import ContactForm from '../components/ContactForm.vue'
 import ContactInfo from '../components/ContactInfo.vue'
 import Footer from '../components/Footer.vue'
 
-import { links, hotelName } from '../constants.ts'
+import { links, hotelName } from '@/constants.ts'
 </script>
 
 <template>
-    <Navbar :links="links" :hotelName="hotelName"/>
+    <Navbar :links="links"/>
     <ContactForm/>
     <ContactInfo/>
     <Footer :hotelName="hotelName"/>

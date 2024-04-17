@@ -1,20 +1,19 @@
 <script setup>
-
+import { RouterLink } from 'vue-router';
 </script>
 
 <template>
     <section id="home-info" class="bg-dark">
         <div class="info-img"></div>
         <div class="info-content">
-            <h2><span class="primary-text">History</span> of our Hotel</h2>
+            <h2><span class="primary-text">Историята</span> на нашия хотел</h2>
             <p>
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Assumenda
-              aliquam dolor alias iste autem, quaerat magni unde accusantium qui
-              fuga placeat quidem quo pariatur, voluptatum, ea sequi? Corporis,
-              explicabo quisquam dolor placeat praesentium nesciunt mollitia quos
-              nobis natus voluptatum asperiores!
+              Отворен през 1990 година като малък семеен бизнес, хотелът "Лазур" е един от първите туристически комплекси в региона. С годините, с усилията на собствениците си и инвестициите в разширяване и модернизация, той се превръща в иконично място за отдих и развлечения.
             </p>
-            <a href="about.html" class="btn btn-light">Read More</a>
+            <RouterLink to="/about">
+              <a class="btn btn-light">Прочетете повече</a>
+            </RouterLink>
+
         </div>
     </section>
 </template>

@@ -5,12 +5,12 @@ import AboutHotel from '../components/AboutHotel.vue'
 import Features from '../components/Features.vue'
 import Footer from '../components/Footer.vue'
 
-import { links, hotelName } from '../constants.ts'
+import { links, hotelName } from '@/constants.ts'
 </script>
 
 <template>
   <header>
-    <Navbar :links="links" :hotelName="hotelName"/>
+    <Navbar :links="links"/>
     <ShowCase />
     <AboutHotel />
     <Features />

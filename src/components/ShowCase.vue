@@ -1,4 +1,5 @@
 <script setup>
+import { RouterLink } from 'vue-router';
 
 </script>
 
@@ -6,9 +7,11 @@
     <div id="showcase">
         <div class="container">
             <div class="showcase-content">
-                <h1><span class="primary-text">Enjoy</span> your stay</h1>
-                <p class="lead">Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio aperiam quos quisquam obcaecati illo facilis.</p>
-                <a class="btn" href="about.html">About our hotel</a>
+                <h1><span class="primary-text">Насладете се</span> на престоя си</h1>
+                <p class="lead"> Заповядяйте в хотел Лазур. Надяваме се да се насладите на престоя си и да се чувствате като у дома си</p>
+                <RouterLink to="/about">
+                    <a class="btn">За хотела</a>
+                </RouterLink>
             </div>
         </div>
     </div>    

@@ -4,7 +4,7 @@ import ServicesIcons from './ServicesIcons.vue'
 import { defineProps } from 'vue';
 import { RouterLink } from 'vue-router';
 
-import { imagePath } from '@/constants';
+import { imagePath } from '@/constants.ts';
 
 const props = defineProps({
     rooms: {
@@ -28,17 +28,17 @@ const props = defineProps({
       <div class="room_result-inner">
         <div class="vblistroomblock">
           <div class="vbimglistdiv">
-            <a
-              class="vbo-roomslist-imglink"
-              href="https://pliskahotel.com/dblpark-view-ai/"
-            >
+            <RouterLink 
+                :to="`rooms/${room.id}`"
+                class="vbo-roomslist-imglink"
+            > 
               <img
                 decoding="async"
-                :src="imagePath + room.imagePath"
+                :src="`${imagePath}${room.imagePath}`"
                 :alt="room.title"
                 class="vblistimg"
               />
-            </a>
+        </RouterLink>
             <div class="vbmodalrdetails vbo-roomslist-opengallery-cont">
               <a
                 href="javascript: void(0);"
@@ -50,9 +50,9 @@ const props = defineProps({
           <div class="vbo-info-room">
             <div class="vbdescrlistdiv">
               <h4 class="vbrowcname">
-                <a href="https://pliskahotel.com/dblpark-view-ai/"
-                  >{{room.title}}</a
-                >
+                <RouterLink :to="`rooms/${room.id}`">
+                    <a>{{room.title}}</a>  
+                </RouterLink>
               </h4>
               <span class="vblistroomcat"></span>
               <div class="vbrowcdescr">
@@ -67,9 +67,7 @@ const props = defineProps({
             <div class="vbdivtotinline">
               <div class="vbsrowprice">
                 <div class="vbrowroomcapacity">
-                  <i class="fas fa-male vbo-pref-color-text"></i>
-                  <i class="fas fa-male vbo-pref-color-text"></i>
-                  <i class="fas fa-male vbo-pref-color-text"></i>
+                  <i v-for="index in room.capacity" :key="index" class="fas fa-male vbo-pref-color-text"></i>
                 </div>
                 <div class="vbsrowpricediv">
                   <span class="room_cost">{{room.price}} лв. за нощувка</span>
@@ -77,11 +75,12 @@ const props = defineProps({
               </div>
               <div class="vbselectordiv">
                 <div class="vbselectr">
-                  <a
+                  <RouterLink 
+                    :to="`rooms/${room.id}`" 
                     class="btn vbo-pref-color-btn"
-                    href="https://pliskahotel.com/dblpark-view-ai/"
-                    >Детайли</a
                   >
+                    Детайли
+                  </RouterLink>
                 </div>
               </div>
             </div>
@@ -232,34 +231,21 @@ ul.vblist .room_result {
 .vbselectr {
 	text-align: center;
 }
-.vbselectr a, .vbselectr-result {
-	transition: all 400ms ease-in-out 0s;
-	-moz-transition: all 400ms ease-in-out 0s;
-	-webkit-transition: all 400ms ease-in-out 0s;
-	-o-transition: all 400ms ease-in-out 0s;
+.vbselectr a {
 	background: #cb5951;
-	cursor: pointer;
 	border-radius:30px;
 	color: #fff;
 	margin: 8px 0 0;
 	padding: 8px;
 	width: 75%;
-	text-align: center;
-	display: inline-block;
-	box-sizing: border-box;
 }
 .vbselectr a:focus {
 	color: #fff;
 	text-decoration: none;
 }
-.vbselectr a:hover, .vbselectr-result:hover {
-	transition:all 400ms ease-in-out 0s;
-	-moz-transition:all 400ms ease-in-out 0s;
-	-webkit-transition:all 400ms ease-in-out 0s;
-	-o-transition:all 400ms ease-in-out 0s;
+.vbselectr a:hover {
 	color: #fff;
 	background: #4B7B92;
-	text-decoration: none;
 }
 
 .vbo-pref-color-btn {
@@ -269,36 +255,6 @@ ul.vblist .room_result {
 .vbo-pref-color-btn:hover {
     background-color: #033f59 !important;
     color: #ffffff !important;
-}
-
-.room_selected .vbselectr-result {
-	transition: all 400ms ease-in-out 0s;
-	-moz-transition: all 400ms ease-in-out 0s;
-	-webkit-transition: all 400ms ease-in-out 0s;
-	-o-transition: all 400ms ease-in-out 0s;
-	background: var(--vbo-green-color);
-	border: 1px solid var(--vbo-green-color);
-	cursor: pointer;
-	border-radius:4px;
-	-moz-border-radius:4px;
-	-webkit-border-radius:4px;
-	color: var(--vbo-contrast-text-color);
-	font-size:16px;
-	margin:8px 0 0;
-	padding: 8px 0;
-	width: 100%;
-	display: inline-block;
-	position: relative;
-}
-.room_selected .vbselectr-result:hover {
-	transition:all 400ms ease-in-out 0s;
-	-moz-transition:all 400ms ease-in-out 0s;
-	-webkit-transition:all 400ms ease-in-out 0s;
-	-o-transition:all 400ms ease-in-out 0s;
-	color: var(--vbo-contrast-text-color);
-	background: var(--vbo-green-color-hover);
-	border: 1px solid var(--vbo-green-color-hover);
-	text-decoration: none;
 }
 
 .vbselectordiv {
@@ -312,7 +268,6 @@ ul.vblist .room_result {
     padding: 0 10px 10px;
     padding: 0 10px 10px;
     width: 100%;
-
 }
 
 .vblistcontainer-grid .vbselectordiv {

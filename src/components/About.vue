@@ -6,9 +6,9 @@
     <section id="about-info" class="bg-light py-3">
         <div class="container">
             <div class="info-left">
-                <h1 class="l-heading"> <span class="primary-text">About</span> our Hotel </h1>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Aperiam excepturi omnis fugiat, quasi saepe provident non nulla itaque porro alias error. Similique repellendus odit enim illum, iusto tempore libero obcaecati.</p>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas voluptatibus architecto labore facere expedita recusandae nesciunt beatae laudantium dolores rerum!</p>
+                <h1 class="l-heading"> За хотел <span class="primary-text">Лазур</span> </h1>
+                <p>Отворен през 1990 година като малък семеен бизнес, хотелът "Лазур" е един от първите туристически комплекси в региона. С годините, с усилията на собствениците си и инвестициите в разширяване и модернизация, той се превръща в иконично място за отдих и развлечения.</p>
+                <p>Днес, "Лазур" продължава да бъде едно от най-любимите места за почивка и развлечение за хора от различни части на света. С модернизирани удобства, висококачествено обслужване и безкрайни възможности за забавления, той продължава да вдъхновява спомени и да създава незабравими преживявания за своите гости.</p>
             </div>
             <div class="info-right">
                 <img src="../assets/img/photo-2.jpg" alt="Hotel">

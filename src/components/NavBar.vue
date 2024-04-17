@@ -6,10 +6,6 @@ import { RouterLink } from 'vue-router';
         links: {
             type: Array,
             required: true
-        },
-        hotelName: {
-            type: String,
-            required: true
         }
     })
 
@@ -23,8 +19,9 @@ import { RouterLink } from 'vue-router';
 <template>
     <nav id="navbar">
         <div class="container">
+            
             <RouterLink to="/">
-                <h2 class="logo"><a href="index.html">{{hotelName}}</a></h2>
+                <img class="logoimage" src="../assets/img/logo.png" alt="Samanta">
             </RouterLink>
             <ul>
                 <RouterLink 
@@ -79,5 +76,10 @@ import { RouterLink } from 'vue-router';
  #navbar ul li a.current{
     background:#444;
     color:#f7c08a;
+}
+
+.logoimage {
+    width: 17vh;
+    height: 9vh;
 }
 </style>

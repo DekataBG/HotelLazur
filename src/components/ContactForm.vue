@@ -5,22 +5,22 @@
 <template>
     <section id="contact-form" class="py-3">
         <div class="container">
-            <h1 class="l-heading"><span class="primary-text">Contact </span> Us</h1>
-            <p>Please fill in all spots so you can contact us</p>
+            <h1 class="l-heading"><span class="primary-text">Свържете </span> се с нас</h1>
+            <p>Моля, попълнете всички полета</p>
             <form>
                 <div class="form-group">
-                    <laber for="name">Name</laber>
+                    <laber for="name">Име</laber>
                     <input type="text" name="Name" id="Name">
                </div>
                <div class="form-group">
-                    <laber for="email">Email</laber>
+                    <laber for="email">Имейл</laber>
                     <input type="email" name="email" id="email">
                </div>
                <div class="form-group">
-                    <laber for="message">Message</laber>
+                    <laber for="message">Съобщение</laber>
                     <textarea type="email" name="message" id="message"></textarea>
                </div>
-               <button type="submit" class="btn">Submit</button>
+               <button type="submit" class="btn">Изпращане</button>
            </form>
         </div>
     </section>
