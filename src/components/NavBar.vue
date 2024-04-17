@@ -14,6 +14,13 @@ import { RouterLink } from 'vue-router';
             link.isOpen = (link === clickedLink)
         });
     }
+
+    import { useRoute } from 'vue-router'
+    const route = useRoute()
+    const currentPath = route.path
+    // End of type declarations
+    console.log(route.path)
+
 </script>
 
 <template>
@@ -31,7 +38,7 @@ import { RouterLink } from 'vue-router';
                     @click="changeActive(link, links)"
                 >
                     <li>
-                        <a :class="link.isOpen ? 'current' : '!current'">{{link.title}}</a>
+                        <a :class="currentPath == link.path ? 'current' : '!current'">{{link.title}}</a>
                     </li>
                 </RouterLink>
 
