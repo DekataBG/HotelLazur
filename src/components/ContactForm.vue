@@ -1,19 +1,29 @@
 <script setup>
+import { ref } from 'vue'
 import {useToast} from 'vue-toast-notification';
 import 'vue-toast-notification/dist/theme-sugar.css';
 import { createMessage } from '../plugins/api.ts'
-import { addReservation } from '../plugins/api.ts';
-import { type ReservationObject } from '@/constants.ts';
+
+const nameText = ref('')
+const emailText = ref('')
+const messageText = ref('')
 
 async function sendMessage() {
-    await addReservation(ReservationObject(id=1, startDate="", endDate="", email="", roomID=1))
-    await createMessage("1", "2", "3")
+    console.log(nameText.value)
+    console.log(emailText.value)
+    console.log(messageText.value)
+    await createMessage(nameText.value, emailText.value, messageText.value)
+
     const $toast = useToast();
     $toast.open({
         message: 'Съобщението е изпратено',
         type: 'success',
         position: 'top'
     });
+
+    nameText.value = ""
+    emailText.value = ""
+    messageText.value = ""
 }
 </script>
 
@@ -23,16 +33,16 @@ async function sendMessage() {
             <h1 class="l-heading"><span class="primary-text">Свържете </span> се с нас</h1>
             <p>Моля, попълнете всички полета</p>
                 <div class="form-group">
-                    <laber for="name">Име</laber>
-                    <input type="text" name="Name" id="Name">
+                    <label for="name">Име</label>
+                    <input v-model="nameText" type="text" name="Name" id="Name">
                </div>
                <div class="form-group">
-                    <laber for="email">Имейл</laber>
-                    <input type="email" name="email" id="email">
+                    <label for="email">Имейл</label>
+                    <input v-model="emailText" type="email" name="email" id="email">
                </div>
                <div class="form-group">
-                    <laber for="message">Съобщение</laber>
-                    <textarea type="email" name="message" id="message"></textarea>
+                    <label for="message">Съобщение</label>
+                    <textarea v-model="messageText" type="email" name="message" id="message"></textarea>
                </div>
                <button @click="sendMessage()" class="btn">Изпращане</button>
         </div>
