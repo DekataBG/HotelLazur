@@ -34,3 +34,18 @@ export async function addReservation(reservation: ReservationObject): Promise<Ro
   const response: AxiosResponse<RoomObject[]> = await axios.post(`${baseURL}/reservations`, reservation)
   return response.data
 }
+
+//post message
+export async function createMessage(name: string, email: string, message: string) {
+  const messageToSend: Message = {
+    id: null, // Assign null or a number value to id
+    name: "John Doe", // Assign a string value to name
+    email: "john@example.com", // Assign a string value to email
+    message: "This is a sample message.", // Assign a string value to message
+  };
+
+  console.log('asdf')
+  // const response: AxiosResponse<Bool> = await axios.post((`${baseURL}/contact`, messageToSend))
+  const response: AxiosResponse<Bool> = await axios.post((`http://127.0.0.1:8000/contact`, 'asdf'))
+  console.log(response)
+}

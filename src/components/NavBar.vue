@@ -18,8 +18,6 @@ import { RouterLink } from 'vue-router';
     import { useRoute } from 'vue-router'
     const route = useRoute()
     const currentPath = route.path
-    // End of type declarations
-    console.log(route.path)
 
 </script>
 

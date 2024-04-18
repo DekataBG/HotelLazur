@@ -1,5 +1,20 @@
 <script setup>
+import {useToast} from 'vue-toast-notification';
+import 'vue-toast-notification/dist/theme-sugar.css';
+import { createMessage } from '../plugins/api.ts'
+import { addReservation } from '../plugins/api.ts';
+import { type ReservationObject } from '@/constants.ts';
 
+async function sendMessage() {
+    await addReservation(ReservationObject(id=1, startDate="", endDate="", email="", roomID=1))
+    await createMessage("1", "2", "3")
+    const $toast = useToast();
+    $toast.open({
+        message: 'Съобщението е изпратено',
+        type: 'success',
+        position: 'top'
+    });
+}
 </script>
 
 <template>
@@ -7,7 +22,6 @@
         <div class="container">
             <h1 class="l-heading"><span class="primary-text">Свържете </span> се с нас</h1>
             <p>Моля, попълнете всички полета</p>
-            <form>
                 <div class="form-group">
                     <laber for="name">Име</laber>
                     <input type="text" name="Name" id="Name">
@@ -20,8 +34,7 @@
                     <laber for="message">Съобщение</laber>
                     <textarea type="email" name="message" id="message"></textarea>
                </div>
-               <button type="submit" class="btn">Изпращане</button>
-           </form>
+               <button @click="sendMessage()" class="btn">Изпращане</button>
         </div>
     </section>
 </template>

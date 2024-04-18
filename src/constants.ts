@@ -20,6 +20,14 @@ export interface RoomObject{
   takenDates: ReservationObject[] | null
 }
 
+export interface Message{
+  id: number | null,
+  name: string,
+  email: string,
+  message: string,
+}
+
+
 export const links = ref([
   { id: 1, title: "Начало", path: "/" },
   { id: 2, title: "За нас", path: "/about" },
