@@ -1,8 +1,9 @@
-import axios, { type AxiosResponse } from 'axios';
-import { type RoomObject, type ReservationObject } from '@/constants.ts';
+import axios, { type AxiosResponse, type AxiosRequestConfig, type RawAxiosRequestHeaders } from 'axios';
+import { type RoomObject, type ReservationObject, type Message } from '@/constants.ts';
 
 
-const baseURL = 'http://127.0.0.1:8000';
+// const baseURL = 'http://127.0.0.1:8000';
+const baseURL = 'http://www.googhigg.com:9000';
 
 export async function fetchRoom(roomID: number): Promise<RoomObject>{
   const response: AxiosResponse<RoomObject> = await axios.get(`${baseURL}/rooms/${roomID}`)
@@ -10,7 +11,7 @@ export async function fetchRoom(roomID: number): Promise<RoomObject>{
 }
 
 export async function fetchRooms(): Promise<RoomObject[]>{
-  const response: AxiosResponse<RoomObject[]> = await axios.get(`${baseURL}/rooms`)
+  const response: AxiosResponse<RoomObject[]> = await axios.get(`${baseURL}/room_types`)
   return response.data
 }
 
@@ -44,8 +45,24 @@ export async function createMessage(name: string, email: string, message: string
     message: "This is a sample message.", // Assign a string value to message
   };
 
-  console.log('asdf')
-  // const response: AxiosResponse<Bool> = await axios.post((`${baseURL}/contact`, messageToSend))
-  const response: AxiosResponse<Bool> = await axios.post((`http://127.0.0.1:8000/contact`, 'asdf'))
-  console.log(response)
+  const client = axios.create({
+    baseURL: `${baseURL}/contact`,
+  });
+
+  (async () => {
+    const config: AxiosRequestConfig = {
+      headers: {
+        'Accept': 'application/json',
+      } as RawAxiosRequestHeaders,
+    };
+
+    try {
+      const data = messageToSend;
+      const response: AxiosResponse = await client.post(`/post`, data , config);
+      console.log(response.status);
+      console.log(response.data.json);    
+    } catch(err) {
+      console.log(err);
+    }  
+  })();
 }

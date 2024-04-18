@@ -31,7 +31,7 @@ export interface Message{
 export const links = ref([
   { id: 1, title: "Начало", path: "/" },
   { id: 2, title: "За нас", path: "/about" },
-  { id: 3, title: "Стаи", path: "/rooms" },
+  { id: 3, title: "Стаи", path: "/room_types" },
   { id: 4, title: "Зали", path: "/halls" },
   { id: 5, title: "Контакти", path: "/contact" },
 ])

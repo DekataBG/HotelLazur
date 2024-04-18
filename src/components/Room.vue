@@ -12,6 +12,9 @@ const props = defineProps({
   },
 });
 
+const parts = props.room.imagePath.split('/')
+const fileName = parts[parts.length - 1]
+console.log(fileName);
 const date = ref();
 const disabledDates = [subDays(new Date(), 1), new Date(), addDays(new Date(), 1)];
 </script>
