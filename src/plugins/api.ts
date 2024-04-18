@@ -44,8 +44,8 @@ export async function createMessage(name: string, email: string, message: string
     message: "This is a sample message.", // Assign a string value to message
   };
 
-  console.log('asdf')
-  // const response: AxiosResponse<Bool> = await axios.post((`${baseURL}/contact`, messageToSend))
-  const response: AxiosResponse<Bool> = await axios.post((`http://127.0.0.1:8000/contact`, 'asdf'))
+  console.log(messageToSend)
+  const response: AxiosResponse<Bool> = await axios.post((`${baseURL}/contact`, messageToSend))
+  // const response: AxiosResponse<Bool> = await axios.post((`http://127.0.0.1:8000/contact`))
   console.log(response)
 }

@@ -1,12 +1,10 @@
-<script setup>
+<script setup lang="ts">
 import {useToast} from 'vue-toast-notification';
 import 'vue-toast-notification/dist/theme-sugar.css';
 import { createMessage } from '../plugins/api.ts'
 import { addReservation } from '../plugins/api.ts';
-import { type ReservationObject } from '@/constants.ts';
 
 async function sendMessage() {
-    await addReservation(ReservationObject(id=1, startDate="", endDate="", email="", roomID=1))
     await createMessage("1", "2", "3")
     const $toast = useToast();
     $toast.open({
