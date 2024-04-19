@@ -3,15 +3,13 @@ import { ref } from 'vue'
 import {useToast} from 'vue-toast-notification';
 import 'vue-toast-notification/dist/theme-sugar.css';
 import { createMessage } from '../plugins/api.ts'
-
+import { hotelName } from '@/constants';
 const nameText = ref('')
 const emailText = ref('')
 const messageText = ref('')
 
 async function sendMessage() {
-    console.log(nameText.value)
-    console.log(emailText.value)
-    console.log(messageText.value)
+    hotelName = "test"
     await createMessage(nameText.value, emailText.value, messageText.value)
 
     const $toast = useToast();

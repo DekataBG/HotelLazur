@@ -1,7 +1,8 @@
 <script setup>
 import ServicesIcons from './ServicesIcons.vue'
+import Filters from './Filters.vue'
 
-import { defineProps } from 'vue';
+import { defineProps, watchEffect, ref } from 'vue';
 import { RouterLink } from 'vue-router';
 
 import { imagePath } from '@/constants.ts';
@@ -13,16 +14,18 @@ const props = defineProps({
     }
 })
 
+const currentRooms = ref(props.rooms)
 </script>
 <template>
   <div class="text-center mt-2">
     <h2>Разгледайте нашите</h2>
     <h1 class="primary-text">Стаи</h1>
   </div>
+  <Filters :rooms="rooms" @filter="currentRooms = $event" />
   <ul class="vblist">
     <li 
         class="room_result" 
-        v-for="room in rooms" 
+        v-for="room in currentRooms" 
         :key="room.id"
     >
       <div class="room_result-inner">
@@ -38,7 +41,7 @@ const props = defineProps({
                 :alt="room.title"
                 class="vblistimg"
               />
-        </RouterLink>
+          </RouterLink>
             <div class="vbmodalrdetails vbo-roomslist-opengallery-cont">
               <a
                 href="javascript: void(0);"

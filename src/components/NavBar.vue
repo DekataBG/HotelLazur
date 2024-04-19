@@ -1,6 +1,6 @@
 <script setup>
 import { defineProps } from 'vue';
-import { RouterLink } from 'vue-router';
+import { RouterLink, useRoute } from 'vue-router';
 
     const props = defineProps({
         links: {
@@ -9,13 +9,6 @@ import { RouterLink } from 'vue-router';
         }
     })
 
-    const changeActive = (clickedLink, allLinks) => {
-        allLinks.forEach(link => {
-            link.isOpen = (link === clickedLink)
-        });
-    }
-
-    import { useRoute } from 'vue-router'
     const route = useRoute()
     const currentPath = route.path
 
@@ -33,7 +26,6 @@ import { RouterLink } from 'vue-router';
                     :to="link.path"
                     v-for="link in links"
                     :key="link.id"
-                    @click="changeActive(link, links)"
                 >
                     <li>
                         <a :class="currentPath == link.path ? 'current' : '!current'">{{link.title}}</a>
