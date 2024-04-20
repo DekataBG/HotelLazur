@@ -63,7 +63,6 @@ export async function fetchReservationsForRoom(roomID: number): Promise<Reservat
 
 //post reservations
 export async function addReservation(room_type_Id: number, startDate: Date, days: number): Promise<ReservationObject>{
-  console.log(startDate, days)
   const response: any = await axios.post(
     `${baseURL}/room_types/${room_type_Id}/reservations`,
     {'startDate': startDate, 'days': days, 'roomID': -1}

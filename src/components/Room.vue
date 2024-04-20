@@ -1,4 +1,4 @@
-<script setup>
+<script lang='ts' setup>
 import { defineProps, ref, onMounted, computed, defineComponent } from 'vue';
 import { addDays, subDays } from 'date-fns';
 import ServicesIcons from '../components/ServicesIcons.vue'
@@ -7,6 +7,7 @@ import '@vuepic/vue-datepicker/dist/main.css';
 import { addReservation, fetchReservationsForType, fetchRoomsFromType } from '@/plugins/api';
 import { useToast } from 'vue-toast-notification';
 import { AxiosError } from 'axios';
+import type { DatePickerInstance } from "@vuepic/vue-datepicker"
 
 const props = defineProps({
   room: {
@@ -19,8 +20,9 @@ const props = defineProps({
 const parts = props.room.imagePath.split('/')
 const fileName = parts[parts.length - 1]
 const date = ref();
+const datepicker = ref<DatePickerInstance>(null);
 const roomTypeReservations = await fetchReservationsForType(props.room.id);
-console.log(roomTypeReservations)
+
 
 const disabledDates = roomTypeReservations.map( (x) => {
   let dates = []
@@ -38,7 +40,6 @@ const disabledDates = roomTypeReservations.map( (x) => {
 async function sendReservation () {
   const $toast = useToast();
   if(date.value && date.value[0] && date.value[1]){
-    console.log(date.value)
 
 
     // Change format into YYYY-MM-DD
@@ -47,8 +48,6 @@ async function sendReservation () {
     const days = Math.floor((date.value[1].getTime() - date.value[0].getTime()) / (1000 * 60 * 60 * 24)) + 1
 
     const result = await addReservation(props.room.id, dateStart, days)
-
-    console.log(result)
 
     if(result instanceof AxiosError){
       $toast.open({
@@ -63,6 +62,7 @@ async function sendReservation () {
         type: 'success',
         position: 'top'
       });
+      datepicker.value.clearValue();
     }
   }
   else{
@@ -114,6 +114,7 @@ async function sendReservation () {
             :disabled-dates="disabledDates"
             locale="bg"
             format="P"
+            ref="datepicker"
         />
     </div>
     <div class="col-1">
