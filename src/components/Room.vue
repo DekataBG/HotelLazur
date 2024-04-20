@@ -17,7 +17,6 @@ const props = defineProps({
 const parts = props.room.imagePath.split('/')
 const fileName = parts[parts.length - 1]
 const date = ref();
-// const disabledDates = [subDays(new Date(), 1), new Date(), addDays(new Date(), 1)];
 const roomTypeReservations = await fetchReservationsForType(props.room.id);
 console.log(roomTypeReservations)
 
@@ -33,8 +32,6 @@ const disabledDates = roomTypeReservations.map( (x) => {
   return dates
 }).flat();
 
-
-// console.log(props.room)
 
 </script>
 
