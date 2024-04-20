@@ -9,19 +9,32 @@ const emailText = ref('')
 const messageText = ref('')
 
 async function sendMessage() {
-    // hotelName = "test"
-    await createMessage(nameText.value, emailText.value, messageText.value)
-
     const $toast = useToast();
-    $toast.open({
-        message: 'Съобщението е изпратено',
-        type: 'success',
-        position: 'top'
-    });
 
-    nameText.value = ""
-    emailText.value = ""
-    messageText.value = ""
+    if(validateEmail(emailText.value) && nameText.value != "" && messageText.value != "") {
+        await createMessage(nameText.value, emailText.value, messageText.value)
+
+        $toast.open({
+            message: 'Съобщението е изпратено',
+            type: 'success',
+            position: 'top'
+        });
+
+        nameText.value = ""
+        emailText.value = ""
+        messageText.value = ""
+    } else {
+        $toast.open({
+            message: 'Съобщението е изпратено',
+            type: 'success',
+            position: 'top'
+        });
+    }
+}
+
+function validateEmail(email) {
+  const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return regex.test(email);
 }
 </script>
 
