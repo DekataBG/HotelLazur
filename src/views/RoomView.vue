@@ -6,7 +6,7 @@ import Footer from '../components/Footer.vue'
 import { links, hotelName, room_types } from '@/constants.ts'
 
 defineProps({
-    roomId: Number
+    roomId: String
 })
 
 
@@ -14,6 +14,12 @@ defineProps({
 
 <template>
     <Navbar :links="links"/>
-    <Room :room="room_types[roomId - 1]" />
+    <Suspense>
+        <Room :room="room_types[parseInt(roomId) - 1]" />
+
+        <template #fallback>
+            Loading...
+        </template>
+    </Suspense>
     <Footer :hotelName="hotelName"/>
 </template>

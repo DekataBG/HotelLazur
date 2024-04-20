@@ -2,14 +2,14 @@
 import { ref } from 'vue'
 import {useToast} from 'vue-toast-notification';
 import 'vue-toast-notification/dist/theme-sugar.css';
-import { createMessage } from '../plugins/api.ts'
+// import { createMessage } from '../plugins/api.ts'
 import { hotelName } from '@/constants';
 const nameText = ref('')
 const emailText = ref('')
 const messageText = ref('')
 
 async function sendMessage() {
-    hotelName = "test"
+    // hotelName = "test"
     await createMessage(nameText.value, emailText.value, messageText.value)
 
     const $toast = useToast();

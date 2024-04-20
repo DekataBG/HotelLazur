@@ -1,9 +1,10 @@
 <script setup>
-import { defineProps, ref, onMounted, computed } from 'vue';
+import { defineProps, ref, onMounted, computed, defineComponent } from 'vue';
 import { addDays, subDays } from 'date-fns';
 import ServicesIcons from '../components/ServicesIcons.vue'
 import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css';
+import { fetchReservationsForType } from '@/plugins/api';
 
 const props = defineProps({
   room: {
@@ -12,10 +13,29 @@ const props = defineProps({
   },
 });
 
+
 const parts = props.room.imagePath.split('/')
 const fileName = parts[parts.length - 1]
 const date = ref();
-const disabledDates = [subDays(new Date(), 1), new Date(), addDays(new Date(), 1)];
+// const disabledDates = [subDays(new Date(), 1), new Date(), addDays(new Date(), 1)];
+const roomTypeReservations = await fetchReservationsForType(props.room.id);
+console.log(roomTypeReservations)
+
+const disabledDates = roomTypeReservations.map( (x) => {
+  let dates = []
+  const [year, month, day] = x.startDate.split('-').map(Number);
+  let xDate = new Date(year, month - 1, day)
+  while (x.days > 0){
+    dates.push(xDate); // YYYY-MM-DD
+    x.days--;
+    xDate = subDays(xDate, 1)
+  }
+  return dates
+}).flat();
+
+
+// console.log(props.room)
+
 </script>
 
 <template>

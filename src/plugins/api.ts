@@ -41,7 +41,6 @@ export async function fetchReservationsForRoom(roomID: number): Promise<Reservat
   return response.data
 }
 
-
 // ===========================
 //        PRIVATE-API
 // ===========================
@@ -69,14 +68,14 @@ export async function fetchReservationsForRoom(roomID: number): Promise<Reservat
 //   return response.data
 // }
 
-// //post message
-// export async function createMessage(name: string, email: string, message: string) {
-//   const messageToSend: Message = {
-//     id: null,
-//     name: name,
-//     email: email,
-//     message: message
-//   };
+//post message
+export async function createMessage(name: string, email: string, message: string) {
+  const messageToSend: Message = {
+    id: null,
+    name: name,
+    email: email,
+    message: message
+  };
   
-//   await axios.post(`${baseURL}/contact`, messageToSend)
-// }
+  await axios.post(`${baseURL}/contact`, messageToSend)
+}
