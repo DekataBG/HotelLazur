@@ -2,8 +2,8 @@ import axios, { type AxiosResponse, type AxiosRequestConfig, type RawAxiosReques
 import { type RoomObject, type ReservationObject, type Message, type RoomTypeObject, type ReservationGeneralInfo } from '@/constants';
 
 
-// const baseURL = 'http://127.0.0.1:8000'; 
-const baseURL = 'http://www.googhigg.com:9000';
+const baseURL = 'http://127.0.0.1:8000'; 
+// const baseURL = 'http://www.googhigg.com:9000';
 
 
 // ===========================
@@ -61,12 +61,17 @@ export async function fetchReservationsForRoom(roomID: number): Promise<Reservat
 //   return response.data
 // }
 
-// //post reservations
-// export async function addReservation(reservation: ReservationObject): Promise<RoomObject[]>{
-//   reservation.id = null
-//   const response: AxiosResponse<RoomObject[]> = await axios.post(`${baseURL}/reservations`, reservation)
-//   return response.data
-// }
+//post reservations
+export async function addReservation(room_type_Id: number, startDate: Date, days: number): Promise<ReservationObject>{
+  console.log(startDate, days)
+  const response: any = await axios.post(
+    `${baseURL}/room_types/${room_type_Id}/reservations`,
+    {'startDate': startDate, 'days': days, 'roomID': -1}
+  ).catch(function (error) {
+    return {'data': error}
+  })
+  return response.data
+}
 
 //post message
 export async function createMessage(name: string, email: string, message: string) {

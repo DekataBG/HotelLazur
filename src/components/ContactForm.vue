@@ -49,6 +49,7 @@ async function sendMessage() {
 
 <style scoped>
 #contact-form .form-group{
+    /* TODO: decide what to do with this typo */
     mairgin-bottom:20px;
 }
 #contact-form label{

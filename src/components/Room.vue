@@ -4,7 +4,9 @@ import { addDays, subDays } from 'date-fns';
 import ServicesIcons from '../components/ServicesIcons.vue'
 import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css';
-import { fetchReservationsForType } from '@/plugins/api';
+import { addReservation, fetchReservationsForType, fetchRoomsFromType } from '@/plugins/api';
+import { useToast } from 'vue-toast-notification';
+import { AxiosError } from 'axios';
 
 const props = defineProps({
   room: {
@@ -32,6 +34,45 @@ const disabledDates = roomTypeReservations.map( (x) => {
   return dates
 }).flat();
 
+
+async function sendReservation () {
+  const $toast = useToast();
+  if(date.value && date.value[0] && date.value[1]){
+    console.log(date.value)
+
+
+    // Change format into YYYY-MM-DD
+    const dateStart = `${date.value[0].getFullYear()}-${('0' + (date.value[0].getMonth() + 1)).slice(-2)}-${('0' + date.value[0].getDate()).slice(-2)}`;
+
+    const days = Math.floor((date.value[1].getTime() - date.value[0].getTime()) / (1000 * 60 * 60 * 24)) + 1
+
+    const result = await addReservation(props.room.id, dateStart, days)
+
+    console.log(result)
+
+    if(result instanceof AxiosError){
+      $toast.open({
+        message: 'Error! ' + result.response.status + ' ' + result.response.statusText,
+        type: 'error',
+        position: 'top'
+      });
+    }
+    else{
+      $toast.open({
+        message: 'Направена резервация',
+        type: 'success',
+        position: 'top'
+      });
+    }
+  }
+  else{
+    $toast.open({
+      message: 'Изберете дати за престой.',
+      type: 'error',
+      position: 'top'
+    });
+  }
+}
 
 </script>
 
@@ -76,7 +117,7 @@ const disabledDates = roomTypeReservations.map( (x) => {
         />
     </div>
     <div class="col-1">
-        <button class="booking-button">РЕЗЕРВИРАЙ</button>
+        <button class="booking-button" @click="sendReservation()">РЕЗЕРВИРАЙ</button>
     </div>
   </div>
 </template>
