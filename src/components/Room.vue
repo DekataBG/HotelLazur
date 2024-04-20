@@ -22,6 +22,7 @@ const fileName = parts[parts.length - 1]
 const date = ref();
 const datepicker = ref<DatePickerInstance>(null);
 const roomTypeReservations = await fetchReservationsForType(props.room.id);
+const $toast = useToast();
 
 
 const disabledDates = roomTypeReservations.map( (x) => {
@@ -37,8 +38,21 @@ const disabledDates = roomTypeReservations.map( (x) => {
 }).flat();
 
 
+// function openPersonalModal() {
+//   if(date.value && date.value[0] && date.value[1]){
+//     submitPersonalInfoModal.show()
+//   }
+//   else{
+//     $toast.open({
+//       message: 'Изберете дати за престой.',
+//       type: 'error',
+//       position: 'top'
+//     });
+//   }
+// }
+
+// TODO: Send personal information of user (email, phone, name)
 async function sendReservation () {
-  const $toast = useToast();
   if(date.value && date.value[0] && date.value[1]){
 
 
@@ -50,6 +64,7 @@ async function sendReservation () {
     const result = await addReservation(props.room.id, dateStart, days)
 
     if(result instanceof AxiosError){
+      console.error(result)
       $toast.open({
         message: 'Error! ' + result.response.status + ' ' + result.response.statusText,
         type: 'error',
@@ -118,8 +133,52 @@ async function sendReservation () {
         />
     </div>
     <div class="col-1">
-        <button class="booking-button" @click="sendReservation()">РЕЗЕРВИРАЙ</button>
+        <button class="booking-button" data-bs-toggle="modal" data-bs-target="#SubmitPersonalInfoModal">РЕЗЕРВИРАЙ</button>
     </div>
+  </div>
+  <div class="modal fade" id="SubmitPersonalInfoModal" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Лична информация</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <!-- <div class="form-group">
+              <label for="name">Име</label>
+              <input v-model="nameText" type="text" name="Name" id="Name">
+            </div>
+            <div class="form-group">
+                  <label for="email">Имейл</label>
+                  <input v-model="emailText" type="email" name="email" id="email">
+            </div>
+            <div class="form-group">
+                  <label for="message">Съобщение</label>
+                  <textarea v-model="messageText" type="email" name="message" id="message"></textarea>
+            </div> -->
+            <div class="mb-3">
+              <label for="name" class="form-label">Име</label>
+              <input v-model="nameText" type="text" name="Name" id="Name" class="form-control">
+            </div>
+            <div class="mb-3">
+              <label for="email" class="form-label">Имейл</label>
+              <input v-model="emailText" type="email" name="email" id="email" class="form-control">
+            </div>
+            <div class="mb-3">
+              <label for="phone" class="form-label">Телефонен номер</label>
+              <input v-model="phoneText" type="text" name="phone" id="phone" class="form-control">
+            </div>
+          </form>
+  
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" @click="sendReservation()">Save changes</button>
+        </div>
+      </div>
+    </div>
+  
   </div>
 </template>
 
