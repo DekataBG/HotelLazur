@@ -1,23 +1,30 @@
 import { ref } from 'vue'
-import { fetchRooms } from './plugins/api'
+import { fetchRoomTypes } from './plugins/api'
 
-export interface ReservationObject{
-  id: number | null,
+export interface ReservationGeneralInfo{
   startDate: string,
-  endDate: string,
+  days: number
+}
+
+export interface ReservationObject extends ReservationGeneralInfo{
+  id: number
   email: string,
   roomID: number
 }
 
-export interface RoomObject{
-  id: number | null,
+export interface RoomTypeObject{
+  id: number
   title: string,
   description: string,
   features: string,
   price: number,
   imagePath: string,
   capacity: number,
-  takenDates: ReservationObject[] | null
+}
+
+export interface RoomObject{
+  id: number,
+  room_type_id: number
 }
 
 export interface Message{
@@ -40,7 +47,7 @@ export const hotelName = "Хотел Лазур"
 
 export const imagePath = "/rooms/"
 
-export const rooms = ref(await fetchRooms())
+export const room_types = ref(await fetchRoomTypes())
 
 const imagePhotosPath = "/halls/"
 export const halls = ref([
