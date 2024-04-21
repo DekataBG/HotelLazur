@@ -2,8 +2,9 @@
 import { ref } from 'vue'
 import {useToast} from 'vue-toast-notification';
 import 'vue-toast-notification/dist/theme-sugar.css';
-// import { createMessage } from '../plugins/api.ts'
+import { createMessage } from '../plugins/api.ts'
 import { hotelName } from '@/constants';
+import { AxiosError } from 'axios';
 const nameText = ref('')
 const emailText = ref('')
 const messageText = ref('')
@@ -12,7 +13,17 @@ async function sendMessage() {
     const $toast = useToast();
 
     if(validateEmail(emailText.value) && nameText.value != "" && messageText.value != "") {
-        await createMessage(nameText.value, emailText.value, messageText.value)
+        const result = await createMessage(nameText.value, emailText.value, messageText.value)
+        
+        console.log(result)
+        if (result instanceof AxiosError){
+            $toast.open({
+                message: 'Error! ' + result.message + ' ' + result.message,
+                type: 'error',
+                position: 'top'
+            })
+            return
+        }
 
         $toast.open({
             message: 'Съобщението е изпратено',
@@ -25,8 +36,8 @@ async function sendMessage() {
         messageText.value = ""
     } else {
         $toast.open({
-            message: 'Съобщението е изпратено',
-            type: 'success',
+            message: 'Съобщението не е валидно',
+            type: 'error',
             position: 'top'
         });
     }

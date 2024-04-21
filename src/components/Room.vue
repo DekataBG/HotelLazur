@@ -51,7 +51,7 @@ async function sendReservation () {
 
     if(result instanceof AxiosError){
       $toast.open({
-        message: 'Error! ' + result.response.status + ' ' + result.response.statusText,
+        message: 'Error! ' + result.response!.status + ' ' + result.response!.statusText,
         type: 'error',
         position: 'top'
       });
@@ -62,7 +62,7 @@ async function sendReservation () {
         type: 'success',
         position: 'top'
       });
-      datepicker.value.clearValue();
+      datepicker.value!.clearValue();
     }
   }
   else{
