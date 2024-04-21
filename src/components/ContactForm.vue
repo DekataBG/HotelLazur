@@ -13,7 +13,7 @@ async function sendMessage() {
     const $toast = useToast();
 
     if(validateEmail(emailText.value) && nameText.value != "" && messageText.value != "") {
-        const result = await createMessage(nameText.value, emailText.value, messageText.value)
+        const result = await createMessage(nameText.value, emailText.value, messageText.value, new Date())
         
         console.log(result)
         if (result instanceof AxiosError){

@@ -1,4 +1,4 @@
-import axios, { type AxiosResponse, type AxiosRequestConfig, type RawAxiosRequestHeaders } from 'axios';
+import axios, { type AxiosResponse, type AxiosRequestConfig, type RawAxiosRequestHeaders, AxiosError } from 'axios';
 import { type RoomObject, type ReservationObject, type Message, type RoomTypeObject, type ReservationGeneralInfo } from '@/constants';
 
 
@@ -62,24 +62,33 @@ export async function fetchReservationsForRoom(roomID: number): Promise<Reservat
 // }
 
 //post reservations
-export async function addReservation(room_type_Id: number, startDate: Date, days: number): Promise<ReservationObject>{
+export async function addReservation(room_type_Id: number, startDate: string, days: number): Promise<ReservationObject | AxiosError>{
   const response: any = await axios.post(
     `${baseURL}/room_types/${room_type_Id}/reservations`,
     {'startDate': startDate, 'days': days, 'roomID': -1}
-  ).catch(function (error) {
+  ).catch((error) => {
     return {'data': error}
   })
   return response.data
 }
 
 //post message
-export async function createMessage(name: string, email: string, message: string) {
+export async function createMessage(name: string, email: string, message: string, sentDate: Date) {
+
+  const formattedDate = `${sentDate.getFullYear()}-${('0' + (sentDate.getMonth() + 1)).slice(-2)}-${('0' + sentDate.getDate()).slice(-2)}`;
+  
   const messageToSend: Message = {
     id: null,
     name: name,
     email: email,
-    message: message
+    message: message,
+    sentDate: formattedDate
   };
   
-  await axios.post(`${baseURL}/contact`, messageToSend)
+  try{
+    return await axios.post(`${baseURL}/messages`, messageToSend)
+  }
+  catch(error){
+    return error
+  }
 }
