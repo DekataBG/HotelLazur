@@ -19,12 +19,11 @@ const props = defineProps({
 
 const parts = props.room.imagePath.split('/')
 const fileName = parts[parts.length - 1]
-const date = ref();
-const datepicker = ref<DatePickerInstance>(null);
 const roomTypeReservations = await fetchReservationsForType(props.room.id);
 const $toast = useToast();
 
-
+const date = ref();
+const datepicker = ref<DatePickerInstance>(null);
 const disabledDates = roomTypeReservations.map( (x) => {
   let dates = []
   const [year, month, day] = x.startDate.split('-').map(Number);
@@ -34,20 +33,71 @@ const disabledDates = roomTypeReservations.map( (x) => {
     x.days--;
     xDate = subDays(xDate, 1)
   }
-  return dates
+  return getPassedDatesInYear().concat(dates)
 }).flat();
 
+function getPassedDatesInYear(): Date[] {
+    const currentDate = new Date();
+    const currentYear = currentDate.getFullYear();
+    const passedDates: Date[] = [];
 
-const emailText = ref('')
+    for (let month = 0; month < currentDate.getMonth() + 1; month++) {
+        const daysInMonth = new Date(currentYear, month + 1, 0).getDate();
+        const lastDayOfMonth = month === currentDate.getMonth() ? currentDate.getDate() : daysInMonth;
+
+        for (let day = 1; day <= lastDayOfMonth; day++) {
+            const date = new Date(currentYear, month, day);
+            passedDates.push(date);
+        }
+    }
+
+    return passedDates;
+}
+
 const nameText = ref('')
+const emailText = ref('')
 const phoneText = ref('')
-
 
 // TODO: Send personal information of user (email, phone, name)
 async function sendReservation () {
+  if(!(date.value && date.value[0] && date.value[1])) {
+    $toast.open({
+      message: 'Изберете дати за престой.',
+      type: 'error',
+      position: 'top'
+    });
+  }
+
+  if(nameText.value === null || nameText.value === undefined || nameText.value.trim() === '') {
+    $toast.open({
+      message: 'Въведете име',
+      type: 'error',
+      position: 'top'
+    });
+    return
+  }
+
+  const emailRegex: RegExp = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if(!emailRegex.test(emailText.value)) {
+    $toast.open({
+      message: 'Невалиден имейл',
+      type: 'error',
+      position: 'top'
+    });
+    return
+  }
+
+  const phoneRegex: RegExp = /^(\+)?\d+$/;
+    if(!phoneRegex.test(phoneText.value)) {
+    $toast.open({
+      message: 'Невалиден телефонен номер',
+      type: 'error',
+      position: 'top'
+    });
+    return
+  }
+
   if(date.value && date.value[0] && date.value[1]){
-
-
     // Change format into YYYY-MM-DD
     const dateStart = `${date.value[0].getFullYear()}-${('0' + (date.value[0].getMonth() + 1)).slice(-2)}-${('0' + date.value[0].getDate()).slice(-2)}`;
 
@@ -65,7 +115,7 @@ async function sendReservation () {
     }
     else{
       $toast.open({
-        message: 'Направена резервация',
+        message: 'Направена е резервация',
         type: 'success',
         position: 'top'
       });
@@ -114,16 +164,16 @@ async function sendReservation () {
   </div>
   <div class="booking row justify-content-center mb-3 p-4">
     <div class="col-3">
-        <VueDatePicker 
-            v-model="date"
-            placeholder="Избери дати"
-            :range="{ noDisabledRange: true }"
-            :disabled-dates="disabledDates"
-            locale="bg"
-            format="P"
-            ref="datepicker"
-        />
-    </div>
+      <VueDatePicker 
+        v-model="date"
+        placeholder="Избери дати"
+        :range="{ noDisabledRange: true }"
+        :disabled-dates="disabledDates"
+        locale="bg"
+        format="P"
+        ref="datepicker"
+      />
+</div>
     <div class="col-1">
         <button class="booking-button" data-bs-toggle="modal" data-bs-target="#SubmitPersonalInfoModal">РЕЗЕРВИРАЙ</button>
     </div>
@@ -137,18 +187,6 @@ async function sendReservation () {
         </div>
         <div class="modal-body">
           <form>
-            <!-- <div class="form-group">
-              <label for="name">Име</label>
-              <input v-model="nameText" type="text" name="Name" id="Name">
-            </div>
-            <div class="form-group">
-                  <label for="email">Имейл</label>
-                  <input v-model="emailText" type="email" name="email" id="email">
-            </div>
-            <div class="form-group">
-                  <label for="message">Съобщение</label>
-                  <textarea v-model="messageText" type="email" name="message" id="message"></textarea>
-            </div> -->
             <div class="mb-3">
               <label for="name" class="form-label">Име</label>
               <input v-model="nameText" type="text" name="Name" id="Name" class="form-control">
@@ -164,8 +202,8 @@ async function sendReservation () {
           </form>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary" @click="sendReservation()">Save changes</button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Затвори</button>
+          <button type="button" class="btn btn-primary" @click="sendReservation()">Резервирай</button>
         </div>
       </div>
     </div>

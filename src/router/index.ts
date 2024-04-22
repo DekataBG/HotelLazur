@@ -35,7 +35,6 @@ const router = createRouter({
     },
     {
       path: '/halls',
-      props: true,
       name: 'halls',
       component: () => import('../views/HallsView.vue')
     }

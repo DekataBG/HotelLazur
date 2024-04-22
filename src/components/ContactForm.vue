@@ -3,7 +3,6 @@ import { ref } from 'vue'
 import {useToast} from 'vue-toast-notification';
 import 'vue-toast-notification/dist/theme-sugar.css';
 import { createMessage } from '../plugins/api.ts'
-import { hotelName } from '@/constants';
 import { AxiosError } from 'axios';
 const nameText = ref('')
 const emailText = ref('')
