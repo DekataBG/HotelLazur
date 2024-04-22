@@ -62,10 +62,12 @@ export async function fetchReservationsForRoom(roomID: number): Promise<Reservat
 // }
 
 //post reservations
-export async function addReservation(room_type_Id: number, startDate: string, days: number): Promise<ReservationObject | AxiosError>{
+export async function addReservation(room_type_Id: number, startDate: string, days: number, email: string, name: string, phone: string): Promise<ReservationObject | AxiosError>{
+  const body = {'startDate': startDate, 'days': days, 'roomID': -1, 'email': email, 'phone': phone, 'name': name}
+  console.log(body)
   const response: any = await axios.post(
     `${baseURL}/room_types/${room_type_Id}/reservations`,
-    {'startDate': startDate, 'days': days, 'roomID': -1}
+    body
   ).catch((error) => {
     return {'data': error}
   })

@@ -38,18 +38,10 @@ const disabledDates = roomTypeReservations.map( (x) => {
 }).flat();
 
 
-// function openPersonalModal() {
-//   if(date.value && date.value[0] && date.value[1]){
-//     submitPersonalInfoModal.show()
-//   }
-//   else{
-//     $toast.open({
-//       message: 'Изберете дати за престой.',
-//       type: 'error',
-//       position: 'top'
-//     });
-//   }
-// }
+const emailText = ref('')
+const nameText = ref('')
+const phoneText = ref('')
+
 
 // TODO: Send personal information of user (email, phone, name)
 async function sendReservation () {
@@ -61,7 +53,7 @@ async function sendReservation () {
 
     const days = Math.floor((date.value[1].getTime() - date.value[0].getTime()) / (1000 * 60 * 60 * 24)) + 1
 
-    const result = await addReservation(props.room.id, dateStart, days)
+    const result = await addReservation(props.room.id, dateStart, days, emailText.value, nameText.value, phoneText.value)
 
     if(result instanceof AxiosError){
       console.error(result)
@@ -170,7 +162,6 @@ async function sendReservation () {
               <input v-model="phoneText" type="text" name="phone" id="phone" class="form-control">
             </div>
           </form>
-  
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
