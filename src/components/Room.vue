@@ -174,8 +174,8 @@ async function sendReservation () {
         ref="datepicker"
       />
 </div>
-    <div class="col-1">
-        <button class="booking-button" data-bs-toggle="modal" data-bs-target="#SubmitPersonalInfoModal">РЕЗЕРВИРАЙ</button>
+    <div class="col-2">
+        <button class="booking-button" data-bs-toggle="modal" data-bs-target="#SubmitPersonalInfoModal">Добави в количка</button>
     </div>
   </div>
   <div class="modal fade" id="SubmitPersonalInfoModal" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false">

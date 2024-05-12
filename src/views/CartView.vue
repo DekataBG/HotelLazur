@@ -1,6 +1,6 @@
 <script setup>
 import Navbar from '../components/NavBar.vue'
-import Hall from '../components/Hall.vue'
+import Reservation from '../components/Reservation.vue'
 import Footer from '../components/Footer.vue'
 
 import { links, hotelName, halls } from '@/constants.ts'
@@ -8,6 +8,6 @@ import { links, hotelName, halls } from '@/constants.ts'
 
 <template>
     <Navbar :links="links"/>
-    <Hall v-for="hall in halls" :key="hall.id" :hall="hall"/>
+    <Reservation/>
     <Footer :hotelName="hotelName"/>
 </template>
