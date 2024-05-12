@@ -1,15 +1,3 @@
-<script setup>
-import { defineProps } from 'vue';
-
-const props = defineProps({
-    hotelName: {
-        type: String,
-        required: true
-    }
-})
-
-</script>
-
 <template>
     <section id="testimonials" class="py-3">
         <div class="container">

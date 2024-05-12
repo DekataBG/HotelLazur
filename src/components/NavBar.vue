@@ -16,8 +16,7 @@ import { RouterLink, useRoute } from 'vue-router';
 
 <template>
     <nav id="navbar">
-        <div class="container">
-            
+        <div class="container">  
             <RouterLink to="/">
                 <img class="logoimage" src="../assets/img/logo.png" alt="Samanta">
             </RouterLink>
@@ -31,13 +30,22 @@ import { RouterLink, useRoute } from 'vue-router';
                         <a :class="currentPath == link.path ? 'current' : '!current'">{{link.title}}</a>
                     </li>
                 </RouterLink>
-
+                <RouterLink to="/cart">
+                    <div class="cart-container">
+                        <button class="cart-button" @click="toggleCart">
+                            <i class="fa fa-shopping-cart fa-2x mt-4 ms-5" id="cart"></i>
+                        </button>
+                        <div class="cart-badge" v-if="1 > 0">
+                            1
+                        </div>
+                      </div>
+                </RouterLink>
             </ul>
         </div>
     </nav>  
 </template>
 
-<style scoped>
+<style>
 /* Navbar */
 #navbar{
     background:#333;
@@ -47,11 +55,6 @@ import { RouterLink, useRoute } from 'vue-router';
 
 #navbar a{
     color:#fff
-}
-
-#navbar h2{
-    float:left;
-    padding-top:20px;
 }
 
 #navbar ul{
@@ -78,5 +81,40 @@ import { RouterLink, useRoute } from 'vue-router';
 .logoimage {
     width: 17vh;
     height: 9vh;
+}
+
+#cart:hover {
+    color: #f7c08a;
+}
+
+#cart {
+    color: white;
+}
+
+.cart-container {
+  position: relative;
+  display: inline-block;
+}
+
+.cart-button {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+.cart-badge {
+  position: absolute;
+  top: 5px;
+  right: -15px;
+  background-color: white;
+  color: black;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 12px;
 }
 </style>
