@@ -9,6 +9,10 @@ import { useToast } from 'vue-toast-notification';
 import { AxiosError } from 'axios';
 import type { DatePickerInstance } from "@vuepic/vue-datepicker"
 
+import { mapMutations } from '../vuex-helper.js'
+
+const { addItem } = mapMutations()
+
 const props = defineProps({
   room: {
     type: Object,
@@ -58,79 +62,27 @@ const nameText = ref('')
 const emailText = ref('')
 const phoneText = ref('')
 
-// TODO: Send personal information of user (email, phone, name)
-async function sendReservation () {
+function addToCart(item) {
   if(!(date.value && date.value[0] && date.value[1])) {
     $toast.open({
       message: 'Изберете дати за престой.',
       type: 'error',
       position: 'top'
     });
+
+    return;
   }
 
-  if(nameText.value === null || nameText.value === undefined || nameText.value.trim() === '') {
-    $toast.open({
-      message: 'Въведете име',
-      type: 'error',
+  $toast.open({
+      message: 'Стаята е добавена в количката',
+      type: 'success',
       position: 'top'
-    });
-    return
-  }
+  });
+  datepicker.value!.clearValue();
 
-  const emailRegex: RegExp = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  if(!emailRegex.test(emailText.value)) {
-    $toast.open({
-      message: 'Невалиден имейл',
-      type: 'error',
-      position: 'top'
-    });
-    return
-  }
-
-  const phoneRegex: RegExp = /^(\+)?\d+$/;
-    if(!phoneRegex.test(phoneText.value)) {
-    $toast.open({
-      message: 'Невалиден телефонен номер',
-      type: 'error',
-      position: 'top'
-    });
-    return
-  }
-
-  if(date.value && date.value[0] && date.value[1]){
-    // Change format into YYYY-MM-DD
-    const dateStart = `${date.value[0].getFullYear()}-${('0' + (date.value[0].getMonth() + 1)).slice(-2)}-${('0' + date.value[0].getDate()).slice(-2)}`;
-
-    const days = Math.floor((date.value[1].getTime() - date.value[0].getTime()) / (1000 * 60 * 60 * 24)) + 1
-
-    const result = await addReservation(props.room.id, dateStart, days, emailText.value, nameText.value, phoneText.value)
-
-    if(result instanceof AxiosError){
-      console.error(result)
-      $toast.open({
-        message: 'Error! ' + result.response!.status + ' ' + result.response!.statusText,
-        type: 'error',
-        position: 'top'
-      });
-    }
-    else{
-      $toast.open({
-        message: 'Направена е резервация',
-        type: 'success',
-        position: 'top'
-      });
-      datepicker.value!.clearValue();
-    }
-  }
-  else{
-    $toast.open({
-      message: 'Изберете дати за престой.',
-      type: 'error',
-      position: 'top'
-    });
-  }
+  item.date = date;
+  addItem(item);
 }
-
 </script>
 
 <template>
@@ -175,7 +127,7 @@ async function sendReservation () {
       />
 </div>
     <div class="col-2">
-        <button class="booking-button" data-bs-toggle="modal" data-bs-target="#SubmitPersonalInfoModal">Добави в количка</button>
+        <button class="booking-button" @click="addToCart(room)">Добави в количка</button>
     </div>
   </div>
   <div class="modal fade" id="SubmitPersonalInfoModal" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false">

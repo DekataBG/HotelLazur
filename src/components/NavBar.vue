@@ -1,17 +1,19 @@
 <script setup>
 import { defineProps } from 'vue';
 import { RouterLink, useRoute } from 'vue-router';
+import { mapGetters } from '../vuex-helper.js'
 
-    const props = defineProps({
-        links: {
-            type: Array,
-            required: true
-        }
-    })
+const { getCartItemsCount } = mapGetters()
 
-    const route = useRoute()
-    const currentPath = route.path
+const props = defineProps({
+    links: {
+        type: Array,
+        required: true
+    }
+})
 
+const route = useRoute()
+const currentPath = route.path
 </script>
 
 <template>
@@ -32,11 +34,11 @@ import { RouterLink, useRoute } from 'vue-router';
                 </RouterLink>
                 <RouterLink to="/cart">
                     <div class="cart-container">
-                        <button class="cart-button" @click="toggleCart">
+                        <button class="cart-button">
                             <i class="fa fa-shopping-cart fa-2x mt-4 ms-5" id="cart"></i>
                         </button>
-                        <div class="cart-badge" v-if="1 > 0">
-                            1
+                        <div class="cart-badge" v-if="getCartItemsCount > 0">
+                            {{ getCartItemsCount }}
                         </div>
                       </div>
                 </RouterLink>
