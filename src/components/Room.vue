@@ -78,10 +78,12 @@ function addToCart(item) {
       type: 'success',
       position: 'top'
   });
-  datepicker.value!.clearValue();
 
-  item.date = date;
+  item.date = date.value;
+  console.log(item.date)
   addItem(item);
+  
+  datepicker.value!.clearValue();
 }
 </script>
 

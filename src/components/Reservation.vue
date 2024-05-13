@@ -72,6 +72,12 @@ async function sendReservation () {
     clearCartItems();
 }
 
+function calculatePrice(room) {
+    const days = Math.floor((room.date[1].getTime() - room.date[0].getTime()) / (1000 * 60 * 60 * 24)) + 1
+    const price = room.price
+
+    return days * price
+}
 </script>
 
 <template>
@@ -79,7 +85,7 @@ async function sendReservation () {
         <div class="container mb-3" v-for="item in getCartItems">
             <div class="info-left">
                 <h1 class="l-heading"> {{ item.title }} </h1>
-                <p>{{ item.price }} лв.</p>
+                <p>{{ calculatePrice(item) }} лв.</p>
             </div>
             <div class="info-right">
                 <img :src="`/rooms/${item.imagePath}`" :alt="СнимкаНаСтаята">
