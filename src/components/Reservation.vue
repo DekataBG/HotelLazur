@@ -4,55 +4,22 @@ import { ref } from 'vue';
 import { useToast } from 'vue-toast-notification';
 import { addReservation } from '@/plugins/api';
 import { AxiosError } from 'axios';
+import ModalComponent from "./ModalComponent.vue";
 
 const $toast = useToast();
 
 const { getCartItems, getCartItemsCount } = mapGetters()
-const { clearCartItems, removeItem } = mapMutations()
+const { clearItems, removeItem } = mapMutations()
 
-const nameText = ref('')
-const emailText = ref('')
-const phoneText = ref('')
-
-async function sendReservation () {
-  if(nameText.value === null || nameText.value === undefined || nameText.value.trim() === '') {
-    $toast.open({
-      message: 'Въведете име',
-      type: 'error',
-      position: 'top'
-    });
-    return
-  }
-
-  const emailRegex: RegExp = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  if(!emailRegex.test(emailText.value)) {
-    $toast.open({
-      message: 'Невалиден имейл',
-      type: 'error',
-      position: 'top'
-    });
-    return
-  }
-
-  const phoneRegex: RegExp = /^(\+)?\d+$/;
-    if(!phoneRegex.test(phoneText.value)) {
-    $toast.open({
-      message: 'Невалиден телефонен номер',
-      type: 'error',
-      position: 'top'
-    });
-    return
-  }
-
+async function sendReservation (email, name, phoneNumber) {
   for(const room of getCartItems.value) {
-    if(room.date.value && room.date.value[0] && room.date.value[1]){
-        // Change format into YYYY-MM-DD
-        const dateStart = `${room.date.value[0].getFullYear()}-${('0' + (room.date.value[0].getMonth() + 1)).slice(-2)}-${('0' + room.date.value[0].getDate()).slice(-2)}`;
+    if(room.date && room.date[0] && room.date[1]){
+        const dateStart = `${room.date[0].getFullYear()}-${('0' + (room.date[0].getMonth() + 1)).slice(-2)}-${('0' + room.date[0].getDate()).slice(-2)}`;
 
-        const days = Math.floor((room.date.value[1].getTime() - room.date.value[0].getTime()) / (1000 * 60 * 60 * 24)) + 1
+        const days = Math.floor((room.date[1].getTime() - room.date[0].getTime()) / (1000 * 60 * 60 * 24)) + 1
 
-        const result = await addReservation(room.id, dateStart, days, emailText.value, nameText.value, phoneText.value)
-
+        const result = await addReservation(room.id, dateStart, days, email, name, phoneNumber)
+        console.log(result)
         if(result instanceof AxiosError){
             console.error(result)
             $toast.open({
@@ -69,7 +36,9 @@ async function sendReservation () {
         type: 'success',
         position: 'top'
     });
-    clearCartItems();
+
+    clearItems();
+    isModalOpened.value = false
 }
 
 function calculatePrice(room) {
@@ -78,9 +47,53 @@ function calculatePrice(room) {
 
     return days * price
 }
+
+const isModalOpened = ref(false);
+
+const openModal = () => {
+  isModalOpened.value = true;
+};
+const closeModal = () => {
+  isModalOpened.value = false;
+};
+
+const submitHandler = async (person) => {
+    if(person.name === null || person.name === undefined || person.name.trim() === '') {
+    $toast.open({
+      message: 'Въведете име',
+      type: 'error',
+      position: 'top'
+    });
+    return
+  }
+
+  const emailRegex: RegExp = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if(!emailRegex.test(person.email)) {
+    $toast.open({
+      message: 'Невалиден имейл',
+      type: 'error',
+      position: 'top'
+    });
+    return
+  }
+
+  const phoneRegex: RegExp = /^(\+)?\d+$/;
+    if(!phoneRegex.test(person.phoneNumber)) {
+    $toast.open({
+      message: 'Невалиден телефонен номер',
+      type: 'error',
+      position: 'top'
+    });
+    return
+  }
+  await sendReservation(person.email, person.name, person.phoneNumber)
+}
 </script>
 
 <template>
+      <ModalComponent :isOpen="isModalOpened" @modal-close="closeModal" @submit="submitHandler" name="first-modal">
+      </ModalComponent>
+      
     <section v-if="getCartItemsCount > 0" id="about-info" class="py-3">
         <div class="container mb-3" v-for="item in getCartItems">
             <div class="info-left">
@@ -96,38 +109,8 @@ function calculatePrice(room) {
         </div>
 
         <div class="text-center mt-5">
-            <button class="booking-button" data-bs-toggle="modal" data-bs-target="#SubmitPersonalInfoModal">РЕЗЕРВИРАЙ</button>
+            <button class="booking-button" @click="openModal">РЕЗЕРВИРАЙ</button>
         </div>
-        <div class="modal fade" id="SubmitPersonalInfoModal" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false">
-            <div class="modal-dialog">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title">Лична информация</h5>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                  <form>
-                    <div class="mb-3">
-                      <label for="name" class="form-label">Име</label>
-                      <input v-model="nameText" type="text" name="Name" id="Name" class="form-control">
-                    </div>
-                    <div class="mb-3">
-                      <label for="email" class="form-label">Имейл</label>
-                      <input v-model="emailText" type="email" name="email" id="email" class="form-control">
-                    </div>
-                    <div class="mb-3">
-                      <label for="phone" class="form-label">Телефонен номер</label>
-                      <input v-model="phoneText" type="text" name="phone" id="phone" class="form-control">
-                    </div>
-                  </form>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Затвори</button>
-                  <button type="button" class="btn btn-primary" @click="sendReservation()">Резервирай</button>
-                </div>
-              </div>
-            </div>
-          </div>
     </section>
     <section v-if="getCartItemsCount == 0" id="about-info" class="py-3">
         <h1 class="text-center">Количката е празна</h1>
