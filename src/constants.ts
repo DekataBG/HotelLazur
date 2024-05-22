@@ -42,6 +42,7 @@ export const links = ref([
   { id: 3, title: "Стаи", path: "/room_types" },
   { id: 4, title: "Зали", path: "/halls" },
   { id: 5, title: "Контакти", path: "/contact" },
+  { id: 6, title: "Галерия", path: "/galery" },
 ])
 
 export const hotelName = "Хотел Лазур"

@@ -28,6 +28,11 @@ const router = createRouter({
       component: () => import('../views/ContactView.vue')
     },
     {
+      path: '/galery',
+      name: 'galery',
+      component: () => import('../views/GaleryView.vue')
+    },
+    {
       path: '/rooms/:roomId',
       props: true,
       name: 'room',
